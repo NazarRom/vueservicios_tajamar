@@ -12,10 +12,8 @@
 </template>
 
 <script>
-//importamos axios
-import axios from 'axios';
-//importamos global
-import Global from '../Global';
+import CochesService from '../services/CochesService';
+const service = new CochesService();
 //aqui podemos declarar variables para usarlas dentro de cualquier metodo
 //var urlCoches = "https://apicochespaco.azurewebsites.net/";
 export default {
@@ -27,12 +25,9 @@ export default {
   },
   methods:{
     loadCoches(){
-        var request = "webresources/coches";
-        var url = Global.urlCoches + request;
-        axios.get(url).then(response =>{
-            this.coches = response.data
-        })
-       
+       service.getCoches().then(result=>{
+        this.coches=result;
+       })
     }
   },
   mounted(){
